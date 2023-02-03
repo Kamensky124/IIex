@@ -10,7 +10,7 @@ function ColorButton() {
             style={{ backgroundColor: `${ isColored === true ? "red": ""}`}}
             onClick={()=>setIsColored(true)}
         >
-            Меняю цвет по клику
+            Меняю цвет по клику!
         </button>
     )
 }
