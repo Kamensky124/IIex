@@ -28,7 +28,39 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+      <script>
+
+//для учебы deepcopy
+        let a = {
+          name: 'andrey',
+          students: ['asya', 'vanya'],
+          classroom: {
+            teacher: {
+              name: 'kolya',
+              age: 15
+            }
+          }
+        };
+        // let b = a;
+        // b.name = "leha";//присваивание меняет и a
+        // console.log(a);
+        console.log(a);
+        let c = {...a}; //поверхностная shallow copy всех примитивных значений без вложенных подобъектов
+        console.log(c.students===a.students);
+        c.students.push('nathan'); // меняет и в "a", так как это поверхностная
+        c.students=[...a.students]; //копируем дополнительно один из подобъектов
+        console.log(c.students===a.students); //теперь неравны, то так придется для каждого подобъекта и подобъекта подобъекта...
+        c.name = "boris";
+
+
+        console.log(a);
+        console.log(c);
+
+
+      </script>
+
     <div id="root"></div>
+
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
