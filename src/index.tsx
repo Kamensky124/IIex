@@ -4,69 +4,49 @@ import reportWebVitals from './reportWebVitals';
 import React, {useState} from "react";
 import {text} from "stream/consumers";
 
-type samuraiType = {
-    id: string
+type UserType = {
+    id: number
     name: string
     status: "online" | "offline"
 }
-type CourseNameType = "HTML" | "JS" | "React" | "Redux" | "HomeWorks"
-type CourseType = {
-    name: CourseNameType
-    mentor: string
-    isDone: boolean
+
+type AddressType = {
+    country: string
+    city: string
+    email: string
 }
 
+type AdressesType = {
+    [userID: string]: AddressType
+}
 
-const samuraiID_1 = "64jf-87kg"
-const samuraiID_2 = "90lg-34ks"
-const samuraiID_3 = "12jm-05fd"
-
-export const samurai: Array<samuraiType> = [
-    {id: samuraiID_1, name: "Bob", status: "online"},
-    {id: samuraiID_2, name: "Alex", status: "offline"},
-    {id: samuraiID_3, name: "Ann", status: "offline"},
+const users: Array<UserType> = [
+    {id: 1, name: "Bob", status: "online"},
+    {id: 2, name: "Alex", status: "offline"},
+    {id: 3, name: "Ann", status: "offline"},
 ]
 
-type TechnologiesType = {
-    [userID: string]: Array<CourseType>
+const addresses: AdressesType = {
+    1: {country: "Russia", city: "Moscow", email: "hey@email.com"},
+    2: {country: "Ukraine", city: "Kiev", email: "yo@send.ua"},
+    3: {country: "Belarus", city: "Minsk", email: "wow@gogo.ru"},
+
 }
 
-export const technologies: TechnologiesType = {
-    [samuraiID_1]: [
-        {name: "HTML", mentor: "Svetlana", isDone: true},
-        {name: "JS", mentor: "Viktor", isDone: true},
-        {name: "React", mentor: "Dmitrij", isDone: false},
-        {name: "Redux", mentor: "Valera", isDone: false},
-        {name: "HomeWorks", mentor: "Ignat", isDone: true},
-    ],
-    [samuraiID_2]: [
-        {name: "HTML", mentor: "Svetlana", isDone: true},
-        {name: "JS", mentor: "Viktor", isDone: true},
-        {name: "React", mentor: "Dmitrij", isDone: true},
-        {name: "Redux", mentor: "Valera", isDone: false},
-        {name: "HomeWorks", mentor: "Ignat", isDone: true},
-    ],
-    [samuraiID_3]: [
-        {name: "HTML", mentor: "Svetlana", isDone: true},
-        {name: "JS", mentor: "Viktor", isDone: true},
-        {name: "React", mentor: "Dmitrij", isDone: false},
-        {name: "Redux", mentor: "Valera", isDone: false},
-        {name: "HomeWorks", mentor: "Ignat", isDone: false},
-    ],
+const updateUserAddress = (userID: number, key: string, newValue: string) => {
+    // debugger
+    return {...addresses,
+        [userID]: {...addresses[userID], [key]: newValue}
+    }
 }
-
-//  const updateCourseStatus = (samuraiID: string, name: CourseNameType, isDone: boolean) => {
-//     return {...technologies,
-//         [samuraiID]: technologies[].map(c => c.name === name ? {...c, isDone} : c)
-//     }
-// }
 
 
 
 const App = () => {
-
-    // updateCourseStatus (samuraiID_1, "HTML", false)
-    // console.log(technologies[samuraiID_1][0])
+    updateUserAddress (4,'city',"Krsk");
+    console.log(users);
+    console.log(addresses);
+    debugger;
     return <div>hi</div>
 }
 
