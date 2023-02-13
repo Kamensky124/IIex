@@ -87,7 +87,7 @@ for (let [key, value] of user) {
 //
 
 
-const numbers = [1000, +20, -50, 77, 9];
+const numbers = [1000, "+20", -50, 77, 9];
 
 //по unicode таблице преобразуя в строки
 console.log(numbers.sort());
@@ -103,3 +103,102 @@ console.log(numbers.sort((a, b) => a-b));
 console.log(numbers.sort((a, b) => b-a));
 console.log(numbers.reverse())
 
+
+
+
+
+
+const students = [
+    {
+        name: "Bob",
+        age: 22,
+        isMarried: true,
+        scores: 85,
+    },
+    {
+        name: "Alex",
+        age: 21,
+        isMarried: true,
+        scores: 90,
+    },
+    {
+        name: "anyha",
+        age: 20,
+        isMarried: false,
+        scores: 120,
+    },
+    {
+        name: "John",
+        age: 19,
+        isMarried: false,
+        scores: 100,
+    },
+    {
+        name: "Helen",
+        age: 20,
+        isMarried: false,
+        scores: 110,
+    },
+    {
+        name: "Ann",
+        age: 30,
+        isMarried: false,
+        scores: 105,
+    },
+];
+
+const user = {
+    name: "Bob",
+    age: 23,
+    isMarried: false,
+    friends: ["Alex", "Nick", "John"],
+};
+
+//sort objects by string props case-sensitive
+const compareObjByName = (a, b) => {
+    // if (a.name > b.name) {
+    //     return 1
+    // } else {
+    //     return -1
+    // }
+    return a.name > b.name ? 1 : -1
+}
+// console.log(students.sort(compareObjByName))
+
+//case-insensitive
+// console.log(students.sort((a, b) => a.name.localeCompare(b.name)));
+
+//sort objects by numerical props
+// debugger;
+console.log(students.sort((a, b) => a.scores - b.scores));
+
+//bubble sort
+const numbers = [1000, 12, -50, 77, 9, 2];
+// const numbers = [1, 2, 3, 0.5, 5, 6];
+
+//sort check a-b is bigger or less than zero
+let iterationCount = 0;
+for (let j = 0; j < numbers.length - 1; j++) {
+    let isSorted = true; //add conditional sort cycle
+    for (let i = 0; i < numbers.length - 1 - j; i++) {
+        if (numbers[i] > numbers[i + 1]) {
+            isSorted = false;
+            iterationCount = iterationCount + 1;
+            // let temporary = numbers[i];
+            // numbers[i] = numbers[i + 1];
+            // numbers[i + 1] = temporary;
+
+            //more modern
+            [numbers[i + 1], numbers[i]] = [numbers[i], numbers[i + 1]]
+        }
+    }
+    if (isSorted) break
+}
+let a1, a2;
+[a1, a2] = numbers;
+console.log(a1, a2)
+
+console.log(numbers)
+console.log(iterationCount)
+
+numbers.reduce
