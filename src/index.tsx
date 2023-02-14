@@ -43,10 +43,10 @@ const updateUserAddress = (userID: number, key: string, newValue: string) => {
 
 
 const App = () => {
-    updateUserAddress (4,'city',"Krsk");
-    console.log(users);
-    console.log(addresses);
-    debugger;
+    // updateUserAddress (4,'city',"Krsk");
+    // console.log(users);
+    // console.log(addresses);
+    // debugger;
     return <div>hi</div>
 }
 
