@@ -1,4 +1,4 @@
-import {sum, saytest, checkStroke, truncateString, getMinLengthWord, setUpperCase} from "./main-07";
+import {sum, saytest, checkStroke, truncateString, getMinLengthWord, setUpperCase, isIncludes} from "./main-07";
 
 //пример Виктора
 test("sum", () => {
@@ -63,3 +63,16 @@ test ("setUpperCaseTest", () => {
 // повторяющихся символов.
 //* попробовать учитывать повтор символов в подстроке
 
+// isIncludes("Incubator", "Cut") => true
+// isIncludes("Incubator", "table") => false
+// isIncludes("Incubator", "inbba") => true
+// isIncludes("Incubator", "inba") => true
+// isIncludes("Incubator", "Incubatorrr")=> true
+
+test ("isIncludesTest", ()=> {
+    expect (isIncludes("Incubator", "Cut")).toBe(true);
+    expect (isIncludes("Incubator", "table")).toBe(false);
+    expect (isIncludes("Incubator", "inbba")).toBe(true);
+    expect (isIncludes("Incubator", "inba")).toBe(true);
+    expect (isIncludes("Incubator", "Incubatorrr")).toBe(true);
+})
