@@ -144,6 +144,7 @@ const bestStudent = deepCopyStudents.reduce((acc, cur) => {
     return (acc.scores > cur.scores ? (acc) : (cur))
 })
 console.log(bestStudent);
+
 //12a. Найдите 2 студента с самым высоким баллом
 
 let [best1, best2] = [students[0], students[0]]
