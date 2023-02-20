@@ -1,3 +1,16 @@
+<script>
+
+    //пример замыкания?
+    const createPhrase = (greet) => {
+    debugger;
+    return (name) => '{greet} ${name}'
+};
+    const sayHi = createPhrase ('hello');
+    console.log (sayHi('Lisa'))
+
+</script>
+
+
 
 //для учебы deepcopy
 let a = {
