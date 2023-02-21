@@ -6,7 +6,7 @@ let ages: Array<number> = [18, 12, 19, 22, 45];
 let ages2: number[] = [18, 12, 19, 22, 45,];
 
 let array: Array<string | number | boolean> = ['ivan', 123, true, 4242,]
-let ages3: (number | string)[] = ['ivan', 123, true, 4242,]
+let ages3: (number | string | boolean)[] = ['ivan', 123, true, 4242,]
 
 type manType = { name: string, height: number }
 
@@ -19,7 +19,7 @@ interface IMan {
 let man1: { name: string, height: number } = {name: 'Dima', height: 1.78}
 let man3: IMan = {name: 'Dima', height: 1.78, surname: 'Ivanov'}
 let man2: manType = {name: 'Sasha', height: 1.8}
-let car: ICar = {model: 'Reno Stepway', year: 2016}
+// let car44: ICar = {model: 'Reno Stepway', year: 2016}
 
 // Создайте массив в котором будут сидеть 2 элемента man1 и man2 и явно типизируйте его.
 // (man1 и man2 - объекты из 5 задания)
@@ -37,7 +37,7 @@ function returnVoid(a: number, b: number): void {
 
 const sum = (a: number, b: number): void => {
     let c = a + b
-    return c
+    // return c
 }
 
 function toUpperCase(strings: Array<string>): Array<string> {

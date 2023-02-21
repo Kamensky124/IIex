@@ -6,11 +6,27 @@
 <!--    <script src="../src/main-07.ts">-->
 <!--<script src="../src/deep_copy.html">-->
 <!--<script src="../src/lesson_8.ts">-->
-<script src="../src/TSpractice-state.ts">
-    </script>
+<!--<script src="../src/TSpractice-state.txt">-->
+<!--    </script>-->
+<script>
+    amtArray = [2000, 500, 100];  // the denomination you want to find.
 
+    for (let i = 0; i < this.amtArray.length; i++) {
+        this.resultArray.push(Math.floor(total / this.amtArray[i]));
+        // Get the new total
+        total = total % this.amtArray[i];
+    }
+    var twothousands_notes = this.resultArray[0];
+    var fivehundred_notes = this.resultArray[1];
+    var hundred_notes = this.resultArray[2];
 
-<!--<div id="root"></div>-->
+    console.log('calculated amt : ' + '100 : ' +
+        hundred_notes + '   500 :  ' +
+        fivehundred_notes + '  2000 :  ' +
+        twothousands_notes);
+</script>
+
+<div id="root"></div>
 
 </body>
 </html>

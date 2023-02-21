@@ -1,49 +1,33 @@
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import store from './TSpractice-state';
 import React, {useState} from "react";
 
-type UserType = {
-    id: number
-    userName: string
-    email: string
-    password: string
+
+function PasswordChecker() {
+    const [password, setPassword] = useState<string>("")
+    return (
+        <main>
+            <p>Your password must have more than 8 charters!</p>
+            <input
+                placeholder={"Enter your password"}
+                value={password}
+                onChange={e => setPassword(e.currentTarget.value)}
+                type={"password"}
+            />
+            {password.length < 9 && <p style={{color: "red"}}>The password is too short!</p>}
+        </main>
+    )
 }
 
-const loraUser: UserType = {
-    id: 1,
-    userName: "Lora",
-    email: 'lora@ya.ru',
-    password: 'asdfasdf123'
-}
 
-type ChangeUserPasswordTypeAT = {
-    type: "CHANGE-USER-PASSWORD"
-    payload: {
-        id: number,
-        newPassword: string
-    }
-}
-
-const state: any = [loraUser]
-
-export const userReducer =
-    (state: UserType[], action: ChangeUserPasswordTypeAT): UserType[] => {
-        switch (action.type) {
-            case "CHANGE-USER-PASSWORD":
-                return state.map(u =>
-                    u.id === action.payload.id
-                        ? {...u, password: action.payload.newPassword}
-                        : u)
-            default:
-                return state
-        }
-    }
-console.log(userReducer(state, {type: "CHANGE-USER-PASSWORD", payload: {id: 1, newPassword: 'sadfasdf'}}))
+// debugger
+console.log(PasswordChecker())
 
 const App = () => {
-    return <div>hi</div>
+    return <div>hia</div>
+
+
 }
 
 const root = ReactDOM.createRoot(
