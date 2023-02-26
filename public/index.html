@@ -9,10 +9,42 @@
 <!--<script src="../src/TSpractice-state.txt">-->
 <!--    </script>-->
 <script>
-    console.log()
+    //EVENT LOOP SANDBOX
+    //SYNCHRONIZE CODE
+    const factorial = (n) => {
+        if (n < 2) {
+            return 1
+        }
+        return n * factorial(n - 1)
+    }
+    console.log(factorial(5))
+    // вызовет переполнение стека
+    // console.log (factorial2(100000000))
+
+    const factorial2 = (n) => {
+        let result = 1;
+        for (let i = n; i > 1; i--) {
+            result *= i
+        }
+        return result
+    }
+    console.log(factorial2(100000000))
+
+    //ASYNCHRONIZE CODE
+    function log(value) {
+        console.log(value)
+    }
+
+    log('start');
+    setTimeout(() => {
+        log('timeout')
+    }, 3000)
+    log('end')
+
+
 </script>
 
-<div id="root"></div>
+<!--<div id="root"></div>-->
 
 </body>
 </html>
