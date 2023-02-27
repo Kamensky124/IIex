@@ -6,42 +6,31 @@
 <!--    <script src="../src/main-07.ts">-->
 <!--<script src="../src/deep_copy.html">-->
 <!--<script src="../src/lesson_8.ts">-->
-<!--<script src="../src/TSpractice-state.txt">-->
+<!--<script src="../src/TSpractice-state.ts">-->
+<!--<script src="../src/SBeventloop.js">-->
 <!--    </script>-->
+
+<!--for mutationObserver sandbox-->
+<h1 id='mut_header'>0</h1>
+<button id='mut_button'>click</button>
+
 <script>
-    //EVENT LOOP SANDBOX
-    //SYNCHRONIZE CODE
-    const factorial = (n) => {
-        if (n < 2) {
-            return 1
-        }
-        return n * factorial(n - 1)
-    }
-    console.log(factorial(5))
-    // вызовет переполнение стека
-    // console.log (factorial2(100000000))
-
-    const factorial2 = (n) => {
-        let result = 1;
-        for (let i = n; i > 1; i--) {
-            result *= i
-        }
-        return result
-    }
-    console.log(factorial2(100000000))
-
-    //ASYNCHRONIZE CODE
-    function log(value) {
-        console.log(value)
-    }
-
-    log('start');
-    setTimeout(() => {
-        log('timeout')
-    }, 3000)
-    log('end')
-
-
+    // mutation observer
+    const button = document.getElementById('mut_button')
+    const header = document.getElementById('mut_header')
+    let counter = 0
+    button.addEventListener('click', () => {
+        counter += 1
+        header.innerText = counter.toString()
+    })
+    const mutationObserver = new MutationObserver((mutations) => {
+        console.log(mutations)
+    })
+    mutationObserver.observe(header, {
+        subtree: true,
+        attributeOldValue: true,
+        childList: true
+    })
 </script>
 
 <!--<div id="root"></div>-->
