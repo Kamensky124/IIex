@@ -11,29 +11,14 @@
 <!--    </script>-->
 
 <!--for mutationObserver sandbox-->
-<h1 id='mut_header'>0</h1>
-<button id='mut_button'>click</button>
+<!--<h1 id='mut_header'>0</h1>-->
+<!--<button id='mut_button'>click</button>-->
 
-<script>
-    // mutation observer
-    const button = document.getElementById('mut_button')
-    const header = document.getElementById('mut_header')
-    let counter = 0
-    button.addEventListener('click', () => {
-        counter += 1
-        header.innerText = counter.toString()
-    })
-    const mutationObserver = new MutationObserver((mutations) => {
-        console.log(mutations)
-    })
-    mutationObserver.observe(header, {
-        subtree: true,
-        attributeOldValue: true,
-        childList: true
-    })
-</script>
+<!--<script>-->
 
-<!--<div id="root"></div>-->
+<!--</script>-->
+
+<div id="root"></div>
 
 </body>
 </html>
