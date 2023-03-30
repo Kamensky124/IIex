@@ -1,4 +1,4 @@
-import {sum, saytest, checkStroke, truncateString, getMinLengthWord, setUpperCase, isIncludes} from "./main-07";
+import {sum, saytest, checkStroke, truncateString, getMinLengthWord, setUpperCase, isIncludes} from "./main-07Str";
 
 //пример Виктора
 test("sum", () => {

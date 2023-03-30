@@ -597,3 +597,217 @@
 
     // var B BAD
     //     return str.length > size ? `${str.slice(0,str.length<3?size:size-3)}...`:str
+
+    function rentalCarCost(d) {
+        // Your solution here
+        let rent = 40;
+        let days3Off = 20;
+        let days7Off = 50;
+        let total = 0
+        return (d < 3) ? (total = d * rent) :
+            (d >= 3 && d < 7) ? (total = d * rent - days3Off) :
+                (d >= 7) ? (total = d * rent - days7Off):0
+    }
+
+    // alternative
+    const rentalCarCost3 = d => d * 40 - ((d > 6) ? 50 : ((d > 2) ? 20 : 0));
+    function rentalCarCost4(d) {
+        return d * 40 - (d >= 7 ? 50 : (d >= 3 ? 20 : 0));
+    }
+
+    console.log(rentalCarCost(3))
+    // 6*4=240-20
+    // very day you rent the car costs $40. If you rent the car for 7 or more days, you get $50 off your total. Alternatively, if you rent the car for 3 or more days, you get $20 off your total.
+    // assert.strictEqual(rentalCarCost(3), 100);
+    // assert.strictEqual(rentalCarCost(4), 140);
+    // assert.strictEqual(rentalCarCost(5), 180);
+    // assert.strictEqual(rentalCarCost(6), 220);
+
+
+    function countBy(x, n) {
+        let z = [];
+        let add = x;
+        for (let i = 0; i < n; i++) {
+            x=x+add
+            z.push(x)
+        }
+        return z;
+    }
+
+    function countBy2(x, n) {
+        var z = [];
+        for (i = 1; i <= n; i++) {
+            z.push(x * i);
+        }
+        return z;
+    }
+
+    const countBy3 = (x, n) => Array.from({length: n}, (v, k) => (k + 1) * x)
+
+    console.log(countBy(2,10))
+
+    // assert.deepEqual(countBy(1,10), [1,2,3,4,5,6,7,8,9,10], "Array does not match")
+    // assert.deepEqual(countBy(2,5), [2,4,6,8,10], "Array does not match")
+
+
+    var countSheep = (num) => {
+
+        if (num > 0) {
+            let result = []
+            for (let i = 1; i < num + 1; i++) {
+                result.push(i + ' sheep...')
+            }
+            return result.join("")
+        } else return ""
+    }
+    console.log(countSheep(3))
+    console.log(countSheep(0))
+    // assert.strictEqual(countSheep(0), "");
+    // assert.strictEqual(countSheep(1), "1 sheep...");
+    // assert.strictEqual(countSheep(2), "1 sheep...2 sheep...");
+    // assert.strictEqual(countSheep(3), "1 sheep...2 sheep...3 sheep...");
+
+    // assert.strictEqual(highAndLow("8 3 -5 42 -1 0 0 -9 4 7 4 -4"), "42 -9");
+
+    const highAndLow = (numbers) => {
+        let strToArray = numbers.split(" ")
+        return resArr = ([maxVal,minVal] = [Math.max(...strToArray), Math.min(...strToArray)]).join(' ')
+    }
+
+    console.log(highAndLow("8 3 -5 42 -1 0 0 -9 4 7 4 -4"))
+
+    // BestSol
+    function highAndLow2(numbers){
+        numbers = numbers.split(' ').map(Number);
+        return Math.max.apply(0, numbers) + ' ' + Math.min.apply(0, numbers);
+    }
+
+    // const bestStudent = students.reduce((acc, st) => acc>st ? acc : st);
+
+    // You're a square!
+    // Test.assertEquals(isSquare(-1), false, "-1: Negative numbers cannot be square numbers");
+    // Test.assertEquals(isSquare( 0), true, "0 is a square number (0 * 0)");
+    // Test.assertEquals(isSquare( 3), false, "3 is not a square number");
+    // Test.assertEquals(isSquare( 4), true, "4 is a square number (2 * 2)");
+    // Test.assertEquals(isSquare(25), true, "25 is a square number (5 * 5)");
+    // Test.assertEquals(isSquare(26), false, "26 is not a square number");
+    //
+    var isSquare = function(x)    {
+        if (x >= 0) {
+
+            // Find floating point value of
+            // square root of x.
+            let sr = Math.sqrt(x);
+
+            // if product of square root
+            // is equal, then
+            // return T/F
+
+            return ((sr * sr) == x);
+        }
+        return false;
+    }
+    // Your answer was wrong for 33: expected true to equal false
+    // Your answer was wrong for 79: expected true to equal false
+
+
+    var isSquare = function (x) {
+        if (x >= 0) {
+
+            // Find floating point value of
+            // square root of x.
+            let sr = Math.sqrt(x);
+            console.log(sr);
+            let testSr = Math.round(sr)
+            // if product of square root
+            // is equal, then
+            // return T/F
+            return ((testSr * testSr) == x);
+        }
+        return false;
+    }
+
+    // Вычислить квадратный корень
+    // Округлить до ближайшего целого
+    // Возвести в квадрат
+    // Проверить, что совпадает с исходным числом.
+
+    // BEST
+    function isSquare2(n) {
+        return Math.sqrt(n) % 1 === 0;
+    }
+    const isSquare3 = n => Number.isInteger(Math.sqrt(n));
+
+
+    console.log(isSquare(4))
+    console.log(isSquare(25))
+    console.log(isSquare(26))
+    console.log(isSquare(33))
+    console.log(isSquare(79))
+
+
+    // Get the Middle Character
+    // You are going to be given a word. Your job is to return the middle character of the word. If the word's length is odd, return the middle character. If the word's length is even, return the middle 2 characters.
+    // Test.assertEquals(getMiddle("test"),"es");
+    // Test.assertEquals(getMiddle("testing"),"t");
+    // Test.assertEquals(getMiddle("middle"),"dd");
+    // Test.assertEquals(getMiddle("A"),"A");
+
+    function getMiddle(s)
+    {
+        let strToArr = s.split('');
+        let strMiddle = Math.round(strToArr.length/2)
+        return (s.length%2)?strToArr[strMiddle-1]:strToArr[strMiddle-1] + strToArr[strMiddle]
+    }
+    console.log(getMiddle("test"))
+    console.log(getMiddle("testing"))//odd
+
+    // BEST
+    function getMiddle2(s)
+    {
+        return s.substr(Math.ceil(s.length / 2 - 1), s.length % 2 === 0 ? 2 : 1);
+    }
+    function getMiddle3(s) {
+        var middle = s.length / 2;
+        return (s.length % 2)
+            ? s.charAt(Math.floor(middle))
+            : s.slice(middle - 1, middle + 1);
+    }
+
+    // Descending Order
+    // Your task is to make a function that can take any non-negative integer as an argument and return it with its digits in descending order. Essentially, rearrange the digits to create the highest possible number.
+    // assert.strictEqual(descendingOrder(0), 0)
+    // assert.strictEqual(descendingOrder(1), 1)
+    // assert.strictEqual(descendingOrder(111), 111)
+    // assert.strictEqual(descendingOrder(15), 51)
+    // assert.strictEqual(descendingOrder(1021), 2110)
+    // assert.strictEqual(descendingOrder(123456789), 987654321)
+    import {Z_BEST_COMPRESSION} from "zlib";
+
+    descendingOrder =(num)=> {
+        if ( num.toString().length>1) {
+            let numbers = num.toString().split('');
+            let iterationCount = 0;
+            for (let j = 0; j < numbers.length - 1; j++) {
+                let isSorted = true; //add conditional sort cycle
+                for (let i = 0; i < numbers.length - 1 - j; i++) {
+                    if (numbers[i] < numbers[i + 1]) {
+                        isSorted = false;
+                        iterationCount = iterationCount + 1;
+                        [numbers[i + 1], numbers[i]] = [numbers[i], numbers[i + 1]]
+                    }
+                }
+                if (isSorted) break
+            }
+            let result = numbers.join('')
+            return parseInt(result)}
+        else {return num}
+    }
+    console.log(descendingOrder(768576567486467761))
+    // BEST
+    function descendingOrder2(n){
+        return parseInt(String(n).split('').sort().reverse().join(''))
+    }
+    function descendingOrder3(n){
+        return +(n + '').split('').sort(function(a,b){ return b - a }).join('');
+    }

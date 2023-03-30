@@ -1,23 +1,16 @@
-import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import React, {useState} from "react";
-
-
+import {combineReducers, createStore} from 'redux'
+import React, {useState, useReducer, useEffect, useCallback, useMemo} from 'react';
+import {Provider, useSelector, useDispatch} from 'react-redux'
+import ReactDOM from 'react-dom';
 
 // debugger
 // console.log()
 
-const App = () => {
-    return <div>hia</div>
-}
 
-const root = ReactDOM.createRoot(
-    document.getElementById('root') as HTMLElement
-);
-root.render(
-    <App/>
-);
 
-reportWebVitals();
+// ReactDOM.render(<IntervalExample/>, document.getElementById('root'))
+// @ts-ignore
+window.store = store;
 

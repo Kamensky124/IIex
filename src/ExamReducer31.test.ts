@@ -6,7 +6,7 @@ import {
     reducerExam36,
     StateType,
     Status
-} from "./ExamReducer";
+} from "./ExamReducer31";
 
 test ('ExamTest36', () => {
     const deleteTrackAC = (trackId: number) => ({type: 'TRACK-DELETED', trackId})
