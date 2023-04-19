@@ -811,3 +811,114 @@
     function descendingOrder3(n){
         return +(n + '').split('').sort(function(a,b){ return b - a }).join('');
     }
+
+    // Rock Paper Scissors
+    // Test.assertEquals(rps('rock', 'scissors'), getMsg(1));
+    // Test.assertEquals(rps('scissors', 'paper'), getMsg(1));
+    // Test.assertEquals(rps('paper', 'rock'), getMsg(1));
+    // Test.assertEquals(rps('scissors', 'rock'), getMsg(2));
+    // Test.assertEquals(rps('paper', 'scissors'), getMsg(2));
+    // Test.assertEquals(rps('rock', 'paper'), getMsg(2));
+    // Test.assertEquals(rps('rock', 'rock'), 'Draw!');
+    // Test.assertEquals(rps('scissors', 'scissors'), 'Draw!');
+    // Test.assertEquals(rps('paper', 'paper'), 'Draw!');
+
+    // "scissors", "paper" --> "Player 1 won!"
+    // "scissors", "rock" --> "Player 2 won!"
+    // "paper", "paper" --> "Draw!"
+
+    const rps = (p1, p2) => {
+        if (p1 === p2) {
+            return 'Draw!'
+        } else if (p1 === 'rock') {
+            if (p2 === 'scissors') {
+                return 'Player 1 won!'
+            } else {
+                return 'Player 2 won!'
+            }
+        } else if (p1 === 'paper') {
+            if (p2 === 'rock') {
+                return 'Player 1 won!'
+            } else {
+                return 'Player 2 won!'
+            }
+        } else if (p1 === 'scissors') {
+            if (p2 === 'paper') {
+                return 'Player 1 won!'
+            } else {
+                return 'Player 2 won!'
+            }
+        }
+    };
+    // console.log(rps('paper', 'scissors'))
+    // BEST
+    const rps2 = (p1, p2) => {
+        if (p1 === p2) return "Draw!";
+        var rules = {rock: "scissors", paper: "rock", scissors: "paper"};
+        if (p2 === rules[p1]) {
+            return "Player 1 won!";
+        } else {
+            return "Player 2 won!";
+        }
+    };
+    const rps3 = (p1, p2) => {
+        if (p1 === p2) {
+            return 'Draw!'
+        }
+        ;
+        return `Player ${/rockscissors|scissorspaper|paperrock/.test(p1 + p2) ? 1 : 2} won!`;
+    }
+    const rps4 = (p1, p2) => {
+        if (p1 === p2) return 'Draw!';
+        if (p1 === 'rock' && p2 === 'scissors') return 'Player 1 won!';
+        if (p1 === 'scissors' && p2 === 'paper') return 'Player 1 won!';
+        if (p1 === 'paper' && p2 === 'rock') return 'Player 1 won!';
+        return 'Player 2 won!';
+    };
+
+    // Exes and Ohs
+    // Check to see if a string has the same amount of 'x's and 'o's. The method must return a boolean and be case insensitive. The string can contain any char.
+    // XO("ooxx") => true
+    // XO("xooxx") => false
+    // XO("ooxXm") => true
+    // XO("zpzpzpp") => true // when no 'x' and 'o' is present should return true
+    // XO("zzoo") => false
+    function XO(str) {
+        let [countX, countO] = [0, 0];
+        let str2 = str
+            .toLowerCase()
+            .split('')
+        str2.forEach(s => {
+                if (s === 'o') {countO++}
+                else if (s === 'x') {countX++}
+                return s
+            }
+        );
+        return countX === countO
+    }
+    // console.log(XO("oOxX"))
+    // BEST
+    function XO2(str) {
+        let x = str.match(/x/gi);
+        let o = str.match(/o/gi);
+        return (x && x.length) === (o && o.length);
+    }
+    const XO3 = str => {
+        str = str.toLowerCase().split('');
+        return str.filter(x => x === 'x').length === str.filter(x => x === 'o').length;
+    }
+    function XO4(str) {
+        return str.toLowerCase().split('x').length === str.toLowerCase().split('o').length;
+    }
+
+
+    // List Filtering
+    // In this kata you will create a function that takes a list of non-negative integers and strings and returns a new list with the strings filtered out.
+    // assert.deepEqual(filter_list([1,2,'a','b']),[1,2], 'For input [1,2,"a","b"]');
+    // assert.deepEqual(filter_list([1,'a','b',0,15]),[1,0,15], 'For input [1,"a","b",0,15]');
+    // assert.deepEqual(filter_list([1,2,'aasf','1','123',123]),[1,2,123], 'For input [1,2,"aasf","1","123",123]');
+    function filter_list(l) {
+        // Return a new array with the strings filtered out
+        return l.filter(item => typeof item === 'number')
+    }
+    console.log(filter_list([1,2,'a','b']))
