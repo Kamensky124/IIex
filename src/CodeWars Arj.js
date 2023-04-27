@@ -922,3 +922,262 @@
         return l.filter(item => typeof item === 'number')
     }
     console.log(filter_list([1,2,'a','b']))
+
+    // Rock Paper Scissors
+    // Test.assertEquals(rps('rock', 'scissors'), getMsg(1));
+    // Test.assertEquals(rps('scissors', 'paper'), getMsg(1));
+    // Test.assertEquals(rps('paper', 'rock'), getMsg(1));
+    // Test.assertEquals(rps('scissors', 'rock'), getMsg(2));
+    // Test.assertEquals(rps('paper', 'scissors'), getMsg(2));
+    // Test.assertEquals(rps('rock', 'paper'), getMsg(2));
+    // Test.assertEquals(rps('rock', 'rock'), 'Draw!');
+    // Test.assertEquals(rps('scissors', 'scissors'), 'Draw!');
+    // Test.assertEquals(rps('paper', 'paper'), 'Draw!');
+
+    // "scissors", "paper" --> "Player 1 won!"
+    // "scissors", "rock" --> "Player 2 won!"
+    // "paper", "paper" --> "Draw!"
+
+    const rps = (p1, p2) => {
+        if (p1 === p2) {
+            return 'Draw!'
+        } else if (p1 === 'rock') {
+            if (p2 === 'scissors') {
+                return 'Player 1 won!'
+            } else {
+                return 'Player 2 won!'
+            }
+        } else if (p1 === 'paper') {
+            if (p2 === 'rock') {
+                return 'Player 1 won!'
+            } else {
+                return 'Player 2 won!'
+            }
+        } else if (p1 === 'scissors') {
+            if (p2 === 'paper') {
+                return 'Player 1 won!'
+            } else {
+                return 'Player 2 won!'
+            }
+        }
+    };
+    // console.log(rps('paper', 'scissors'))
+    // BEST
+    const rps2 = (p1, p2) => {
+        if (p1 === p2) return "Draw!";
+        var rules = {rock: "scissors", paper: "rock", scissors: "paper"};
+        if (p2 === rules[p1]) {
+            return "Player 1 won!";
+        } else {
+            return "Player 2 won!";
+        }
+    };
+    const rps3 = (p1, p2) => {
+        if (p1 === p2) {
+            return 'Draw!'
+        }
+        ;
+        return `Player ${/rockscissors|scissorspaper|paperrock/.test(p1 + p2) ? 1 : 2} won!`;
+    }
+    const rps4 = (p1, p2) => {
+        if (p1 === p2) return 'Draw!';
+        if (p1 === 'rock' && p2 === 'scissors') return 'Player 1 won!';
+        if (p1 === 'scissors' && p2 === 'paper') return 'Player 1 won!';
+        if (p1 === 'paper' && p2 === 'rock') return 'Player 1 won!';
+        return 'Player 2 won!';
+    };
+
+    // Exes and Ohs
+    // Check to see if a string has the same amount of 'x's and 'o's. The method must return a boolean and be case insensitive. The string can contain any char.
+    // XO("ooxx") => true
+    // XO("xooxx") => false
+    // XO("ooxXm") => true
+    // XO("zpzpzpp") => true // when no 'x' and 'o' is present should return true
+    // XO("zzoo") => false
+    function XO(str) {
+        let [countX, countO] = [0, 0];
+        let str2 = str
+            .toLowerCase()
+            .split('')
+        str2.forEach(s => {
+                if (s === 'o') {
+                    countO++
+                } else if (s === 'x') {
+                    countX++
+                }
+                return s
+            }
+        );
+        return countX === countO
+    }
+
+    // console.log(XO("oOxX"))
+    // BEST
+    function XO2(str) {
+        let x = str.match(/x/gi);
+        let o = str.match(/o/gi);
+        return (x && x.length) === (o && o.length);
+    }
+
+    const XO3 = str => {
+        str = str.toLowerCase().split('');
+        return str.filter(x => x === 'x').length === str.filter(x => x === 'o').length;
+    }
+
+    function XO4(str) {
+        return str.toLowerCase().split('x').length === str.toLowerCase().split('o').length;
+    }
+
+
+    // List Filtering
+    // In this kata you will create a function that takes a list of non-negative integers and strings and returns a new list with the strings filtered out.
+    // assert.deepEqual(filter_list([1,2,'a','b']),[1,2], 'For input [1,2,"a","b"]');
+    // assert.deepEqual(filter_list([1,'a','b',0,15]),[1,0,15], 'For input [1,"a","b",0,15]');
+    // assert.deepEqual(filter_list([1,2,'aasf','1','123',123]),[1,2,123], 'For input [1,2,"aasf","1","123",123]');
+    function filter_list(l) {
+        // Return a new array with the strings filtered out
+        return l.filter(item => typeof item === 'number')
+    }
+
+    console.log(filter_list([1, 2, 'a', 'b']))
+    // Isograms
+    // An isogram is a word that has no repeating letters, consecutive or non-consecutive. Implement a function that determines whether a string that contains only letters is an isogram. Assume the empty string is an isogram. Ignore letter case.
+    //
+    // Example: (Input --> Output)
+    //
+    // "Dermatoglyphics" --> true "aba" --> false "moOse" --> false (ignore letter case)
+    //
+    // isIsogram "Dermatoglyphics" = true
+    // isIsogram "moose" = false
+    // isIsogram "aba" = false
+    // assert.strictEqual( isIsogram("Dermatoglyphics"), true );
+    // assert.strictEqual( isIsogram("isogram"), true );
+    // assert.strictEqual( isIsogram("aba"), false, "same chars may not be adjacent" );
+    // assert.strictEqual( isIsogram("moOse"), false, "same chars may not be same case" );
+    // assert.strictEqual( isIsogram("isIsogram"), false );
+    // assert.strictEqual( isIsogram(""), true, "an empty string is a valid isogram" );
+    //
+
+    function isIsogram2(s) {
+        let s2 = s.toLowerCase();
+        let s4 = new Set(s)
+        console.log(s4);
+        return new Set(s2).size == s2.length;
+    }
+
+    console.log(isIsogram2("Deermatoglyphics"))
+
+    function isIsogram3(str) {
+        return new Set(str.toUpperCase()).size == str.length;
+    }
+
+    function isIsogram4(str) {
+        return !/(\w).*\1/i.test(str)
+    }
+
+    //z.
+    function isIsogram5(str) {
+        var i, j;
+        str = str.toLowerCase();
+        for (i = 0; i < str.length; ++i)
+            for (j = i + 1; j < str.length; ++j)
+                if (str[i] === str[j])
+                    return false;
+        return true;
+    }
+
+    function isIsogram(str) {
+        str = str.toLowerCase();
+        let IsogramDictionary = []
+        for (i = 0; i < str.length; i++) {
+            IsogramDictionary[i] = str[i]
+        }
+        for (i = 0; i < str.length; i++) {
+            for (j = 1; j < IsogramDictionary.length; j++)
+                if (str[i] === IsogramDictionary[j]) {
+                    console.log(str[i], IsogramDictionary[j])
+                    return true
+                }
+        }
+        return false
+    }
+
+
+    // String ends with?
+    //     Complete the solution so that it returns true if the first argument(string) passed in ends with the 2nd argument (also a string).
+    // Examples:
+    //     solution('abc', 'bc') // returns true
+    // solution('abc', 'd') // returns false
+    // Test.assertEquals(solution('abcde', 'cde'), true)
+    // Test.assertEquals(solution('abcde', 'abc'), false)
+
+    function solution11(str, ending){
+        if (ending.length > 0) {
+            return str.slice(-ending.length) == ending ? true: false;
+        }
+        else {return true}
+    }
+
+    function solution12(str, ending){
+        return str.endsWith(ending);
+    }
+
+    function solution13(str, ending){
+        if (typeof(str) != "string" || typeof(ending) != "string")
+            throw "wrong type";
+        if (ending.length>str.length)
+            return false;
+        return str.substr(str.length-ending.length, ending.length) == ending;
+    }
+
+    function solution14(str, ending){
+        let split_str = str.split('');
+        let integerEnding = ending.length;
+
+        let reversedArr = reverse(split_str);
+        let reversedEnding = reverse((ending.split('')));
+        let checker = true;
+
+        for (let i = 0; i < integerEnding; i++) {
+            if (reversedArr[i] != reversedEnding[i]){
+                checker = false;
+            }
+        };
+
+        return checker;
+
+
+        function reverse(arr) {
+            for (let i = 0; i < arr.length / 2; i++) {
+                let oldElement = arr[i];
+                let previousIndex = arr.length - 1 - i;
+                arr[i] = arr[previousIndex];
+                arr[previousIndex] = oldElement;
+            }
+            return arr;
+        }
+    }
+
+    console.log(solution('abc', ''))
+    // console.log(solution('abcde', 'abc'))
+    // console.log(solution('ninja', 'ja'))
+
+    // console.log(firstArr.length)
+    // console.log(secondArr.length)
+    // console.log([firstArr, secondArr])
+    // console.log(firstArr.length - secondArr.length)
+
+
+    // console.log(firstArr.length)
+    // console.log(secondArr.length)
+    // console.log([firstArr,secondArr])
+    // console.log(firstArr.length-secondArr.length)
+    // if (secondArr.length<=2) {for (let i=secondArr.length-2; i<firstArr.length; i++) {
+    //
+    //
+    //     console.log(firstArr[i])
+    //     console.log(secondArr[i-secondArr.length+2])
+    // }}
+
+
+
