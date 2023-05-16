@@ -1241,4 +1241,93 @@
 
 
 
+    function validatePIN2(pin) {
+        const regex = /^(\d{4}|\d{6})$/
+        return regex.test(pin);
+    }
+    // alt1
+    function validatePIN11(pin) {
+        return /^(\d{4}|\d{6})$/.test(pin)
+    }
+    // alt2
+    function validatePIN12 (pin) {
+        var pinlen = pin.length;
+        var isCorrectLength = (pinlen == 4 || pinlen == 6);
+        var hasOnlyNumbers = pin.match(/^\d+$/);
+        if(isCorrectLength && hasOnlyNumbers){
+            return true;
+        }
+        return false;
+    }
+
+
+    console.log(validatePIN('1'))
+    console.log(validatePIN("12345"))
+    console.log(validatePIN("123433"))
+    // wrong
+    function validatePIN(pin) {
+        if (pin.length !== 4 && pin.length !== 6) {
+            return false
+        }
+        pin = pin.split('')
+        for (let i = 0; i < pin.length; i++) {
+            if (isNaN(pin[i])) {
+                return false
+            }
+        }
+        return true
+    }
+    // wrong
+    function validatePIN3(pin) {
+        const acceptedPINLength = [4, 6];
+        return acceptedPINLength.includes(pin.length) && !isNaN(pin);
+    }
+
+
+    // accum("abcd") -> "A-Bb-Ccc-Dddd"
+    // accum("RqaEzty") -> "R-Qq-Aaa-Eeee-Zzzzz-Tttttt-Yyyyyyy"
+    // accum("cwAt") -> "C-Ww-Aaa-Tttt"
+
+    // best
+    function accum1(s) {
+        return s.split('').map((c, i) => (c.toUpperCase() + c.toLowerCase().repeat(i))).join('-');
+    }
+    function accum2(s) {
+        return s.split('').map((x,index) => x.toUpperCase()+Array(index+1).join(x.toLowerCase())).join('-');
+    }
+
+    function accum4(str) {
+        var letters = str.split('');
+        var result = [];
+        for (var i = 0; i < letters.length; i++) {
+            result.push(letters[i].toUpperCase() + Array(i + 1).join(letters[i].toLowerCase()));
+        }
+        return result.join('-');
+    }
+    // Here's the solution to the problem using JavaScript:
+
+    // chatGPT
+    function accum(str) {
+        const arr = str.toLowerCase().split('');
+        let result = [];
+        for (let i = 0; i < arr.length; i++) {
+            let letter = arr[i];
+            result.push(letter.toUpperCase() + Array(i + 1).join(letter));
+        }
+        return result.join('-');
+    }
+
+    console.log(accum("abcd")); // Output: "A-Bb-Ccc-Dddd"
+
+    // Let's go through the solution step-by-step:
+    //
+    // 1. We define a function named `accum` which takes a single parameter `str`.
+    // 2. We convert the input string to lowercase characters and split them into an array using `split('')`.
+    // 3. We initialize an empty array named `result` which we'll be using to store our intermediate results.
+    // 4. We loop through all the elements of the `arr` array and for each character, we construct a string by concatenating one uppercase letter followed by `i+1` lowercase letters of the same kind using the `Array(i + 1).join(letter)` code.
+    // 5. We push the constructed string to the `result` array.
+    // 6. Finally, we join the `result` array elements with a hyphen `-` and return it.
+    //
+    //     When we run this code and pass the string `"abcd"` as an input, it produces the output `"A-Bb-Ccc-Dddd"`, which is the expected result.
+
 
