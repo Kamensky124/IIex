@@ -1179,5 +1179,66 @@
     //     console.log(secondArr[i-secondArr.length+2])
     // }}
 
+    // assert.strictEqual(findShort("bitcoin take over the world maybe who knows perhaps"), 3);
+    // assert.strictEqual(findShort("turns out random test cases are easier than writing out basic ones"), 3);
+    // assert.strictEqual(findShort("Let's travel abroad shall we"), 2);
+
+    console.log(findShort("Let's travel abroad shall we"))
+
+    function findShort(s){
+        const words=s.split(' ');
+        const shortest = words.reduce((shortestWord, currentWord) => {
+            return currentWord.length < shortestWord.length ? currentWord : shortestWord;
+        }, words[0]);
+        return shortest.length
+    }
+
+    function findShort2(s){
+        return Math.min.apply(null, s.split(' ').map(w => w.length));
+    }
+    function findShort4(s){
+        return Math.min(...s.split(" ").map (s => s.length));
+    }
+    function findShort3(s){
+        var arr = s.split(' ');
+        var smallest = arr[0];
+        for (var i = 0; i < arr.length; i++) {
+            if(arr[i].length < smallest.length){
+                smallest = arr[i];
+            }
+        }
+        return smallest.length;
+    }
+    const findShort5 = (s) => s
+        .split(' ')
+        .sort((a, b) => b.length - a.length)
+        .pop()
+        .length;
+
+    function findShort6(s) {
+        return s.split(' ').reduce((min, word) => Math.min(min, word.length), Infinity);
+    }
+
+    console.log(maskify('4556364607935616'))
+
+    // return masked string
+    function maskify(cc) {
+        let arr = cc.split('')
+        for (i=0;i<arr.length-4;i++) {
+            arr[i]="#"
+        }
+        let str = arr.join('')
+        return str
+    }
+
+    function maskify2(cc) {
+        return cc.slice(0, -4).replace(/./g, '#') + cc.slice(-4);
+    }
+
+    function maskify(cc) {
+        return cc.replace(/.(?=....)/g, '#');
+    }
+
+
 
 
