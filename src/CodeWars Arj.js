@@ -1331,3 +1331,243 @@
     //     When we run this code and pass the string `"abcd"` as an input, it produces the output `"A-Bb-Ccc-Dddd"`, which is the expected result.
 
 
+    // Growth of a Population
+    //
+    // In a small town the population is p0 = 1000 at the beginning of a year. The population regularly increases by 2 percent per year and moreover 50 new inhabitants per year come to live in the town. How many years does the town need to see its population greater or equal to p = 1200 inhabitants?
+    //
+    //     p0, percent, aug (inhabitants coming or leaving each year), p (population to equal or surpass)
+
+    // Test.assertEquals(nbYear(1500, 5, 100, 5000), 15);
+    // Test.assertEquals(nbYear(1500000, 2.5, 10000, 2000000), 10);
+    // Test.assertEquals(nbYear(1500000, 0.25, 1000, 2000000), 94);
+
+    function nbYear(p0, percent, aug, p) {
+        let sum =0;
+        let count =0;
+        while(sum < p){
+            sum = Math.floor(p0 + p0 * (percent/100) + aug)
+            p0 = sum;
+            count ++;
+        }
+        return count;
+    }
+
+    function nbYear2(p0, percent, aug, p) {
+
+        for (var years = 0; p0 < p; years++) {
+            p0 = Math.floor(p0 + p0 * percent / 100 + aug);
+        }
+        return years
+    }
+
+    function nbYear3(p0, percent, aug, p) {
+        var count = 0;
+        while (p0 < p) {
+            p0 = Math.floor((1 + percent / 100) * p0 + aug);
+            count++
+        }
+        return count;
+    }
+
+    // function nbYear(p0, percent, aug, p, years = 0) {
+    //     return p0 >= p
+    //         ? years
+    //         : nbYear(
+    //             Math.floor(p0 + p0 * (percent / 100)) + aug,
+    //             percent,
+    //             aug,
+    //             p,
+    //             years + 1
+    //         );
+    // }
+
+    console.log(nbYear(1500, 5, 100, 5000))
+
+    // Growth of a Population
+    //
+    // In a small town the population is p0 = 1000 at the beginning of a year. The population regularly increases by 2 percent per year and moreover 50 new inhabitants per year come to live in the town. How many years does the town need to see its population greater or equal to p = 1200 inhabitants?
+    //
+    //     p0, percent, aug (inhabitants coming or leaving each year), p (population to equal or surpass)
+
+    function nbYear5(p0, percent, aug, p) {
+        let sum = 0;
+        let count = 0;
+        while (sum < p) {
+            sum = Math.floor(p0 + p0 * (percent / 100) + aug)
+            p0 = sum;
+            count++;
+        }
+        return count;
+    }
+
+    function nbYear2(p0, percent, aug, p) {
+
+        for (var years = 0; p0 < p; years++) {
+            p0 = Math.floor(p0 + p0 * percent / 100 + aug);
+        }
+        return years
+    }
+
+    function nbYear3(p0, percent, aug, p) {
+        var count = 0;
+        while (p0 < p) {
+            p0 = Math.floor((1 + percent / 100) * p0 + aug);
+            count++
+        }
+        return count;
+    }
+
+    function nbYear(p0, percent, aug, p) {
+        let year = 0
+        let sum = p0
+        for (year = 0; sum < p; year++) {
+            sum = (sum + Math.round(sum * (percent / 100)) + aug)
+
+        }
+        return year
+    }
+
+    console.log(nbYear(1500, 5, 100, 5000))
+
+    const Test = require('@codewars/test-compat');
+
+    describe("nbYear",function() {
+        it("Basic tests",function() {
+            Test.assertEquals(nbYear(1500, 5, 100, 5000), 15);
+            Test.assertEquals(nbYear(1500000, 2.5, 10000, 2000000), 10);
+            Test.assertEquals(nbYear(1500000, 0.25, 1000, 2000000), 94);
+        })})
+
+    // Two to One
+    // Test.assertEquals(longest("aretheyhere", "yestheyarehere"), "aehrsty")
+    // Test.assertEquals(longest("loopingisfunbutdangerous", "lessdangerousthancoding"), "abcdefghilnoprstu")
+    // Test.assertEquals(longest("inmanylanguages", "theresapairoffunctions"), "acefghilmnoprstuy")
+
+    longest = (s1, s2) => {
+        let longest = s1 + s2
+        //to array
+        longest = longest.split('').sort()
+        let result = []
+        for (let i = 0; i < longest.length; i++) {
+            if (!result.includes(longest[i])) {
+                result.push(longest[i])
+            }
+        }
+        return result.join('')
+    }
+
+    console.log(longest("aretheyhere", "yestheyarehere"))
+
+// BEST
+    const longest2 = (s1, s2) => [...new Set(s1+s2)].sort().join('')
+
+    function longest3(s1, s2) {
+        // your code
+        s3 = s1 + s2;
+        s4 = s3.split("");
+        s4 = s4.sort().filter(function(element, index, array){
+            return element !== array[index - 1];
+        });
+        return s4.join("");
+    }
+
+    // Reverse words
+    // "This is an example!" ==> "sihT si na !elpmaxe"
+    // "double  spaces"      ==> "elbuod  secaps"
+
+    const reverseWords = (str) => {
+        arrWords  = str.split(' ')
+        for (let i = 0; i < arrWords.length; i++) {
+            arrWords[i] = arrWords[i].split('').reverse().join('')
+        }
+        return arrWords.join(' ')
+    }
+    console.log(reverseWords('This is an example!'))
+
+    // The highest profit wins!
+    // Examples (Input --> Output)
+    //     [1,2,3,4,5] --> [1,5]
+    //     [2334454,5] --> [5,2334454]
+    //     [1]         --> [1,1]
+
+    const minMax = (arr) => {
+        let newarr = []
+        arr.sort((a, b) => a - b)
+        newarr.push(arr[0])
+        newarr.push(arr[arr.length - 1])
+        return newarr
+    }
+
+    console.log(profit([5, 10, 1]))
+
+    // best
+    function minMax2(arr){
+        return [Math.min(...arr), Math.max(...arr)];
+    }
+    //разобраться с apply и Math  в скобках
+    function minMax3(arr){
+        return [Math.min.apply(Math, arr), Math.max.apply(Math, arr)];
+    }
+
+    // Testing 1-2-3
+
+    // assert.deepEqual(number([]), [], 'Empty array should return empty array');
+    // assert.deepEqual(number(["a", "b", "c"]), ["1: a", "2: b", "3: c"], 'Return the correct line numbers');
+    // });
+
+    var number = function (array) {
+        let count = 1
+        return new_array = array.map((item) => {
+            item = count++ + ": " + item
+            return item
+        })
+    }
+
+    console.log(number(["a", "b", "c"]))
+
+    var number2 = function(array) {
+        return array.map(function (line, index) {
+            return (index + 1) + ": " + line;
+        });
+    }
+
+    let number3 = (a) => a.map((v, i) => `${i + 1}: ${v}`)
+
+    var number4 = function(arr) {
+        var newArr = [];
+        if (arr.length === 0) {
+            return [];
+        } else {
+            for (var i = 0, len = arr.length; i < len; i += 1) {
+                newArr.push((i + 1) + ': ' + arr[i]);
+            }
+        }
+        return newArr;
+    }
+
+    // Number of People in the Bus
+    // assert.strictEqual(number([[10,0],[3,5],[5,8]]),5);
+    // assert.strictEqual(number([[3,0],[9,1],[4,10],[12,2],[6,1],[7,10]]),17);
+    // assert.strictEqual(number([[3,0],[9,1],[4,8],[12,2],[6,1],[7,8]]),21);
+    // assert.strictEqual(number([[0,0]]),0);
+    var number11 = function (busStops) {
+        let passIn = 0
+        for (i = 0; i < busStops.length; i++) {
+            let stop = 0
+            stop = busStops[i][0] - busStops[i][1]
+            passIn = passIn + stop
+        }
+        return passIn
+    }
+    console.log(number11([[10, 0], [3, 5], [5, 8]]))
+
+    const number12 = (busStops) => busStops.reduce((rem, [on, off]) => rem + on - off, 0);
+
+    var number13 = function(busStops){
+        var totalPeople = 0;
+        for (var i=0; i<busStops.length; i++) {
+            totalPeople += busStops[i][0];
+            totalPeople -= busStops[i][1];
+        }
+        return totalPeople;
+    }
