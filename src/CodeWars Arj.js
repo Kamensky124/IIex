@@ -1571,3 +1571,84 @@
         }
         return totalPeople;
     }
+
+    // Remove the minimum
+    // Given an array of integers, remove the smallest value. Do not mutate the original array/list. If there are multiple elements with the same value, remove the one with a lower index. If you get an empty array/list, return an empty array/list.
+    //     Don't change the order of the elements that are left.
+    //
+    // assert.deepEqual(removeSmallest([1, 2, 3, 4, 5]), [2, 3, 4, 5], "Wrong result for [1, 2, 3, 4, 5]");
+    // assert.deepEqual(removeSmallest([5, 3, 2, 1, 4]), [5, 3, 2, 4], "Wrong result for [5, 3, 2, 1, 4]");
+    // assert.deepEqual(removeSmallest([2, 2, 1, 2, 1]), [2, 2, 2, 1], "Wrong result for [2, 2, 1, 2, 1]");
+    // assert.deepEqual(removeSmallest([]), [], "Wrong result for []")
+
+    //bad and ugly
+    function removeSmallest(numbers) {
+        let result = [],
+            length = numbers.length,
+            array = [...numbers],
+            count = 0
+        for (let i = 0; i < length - 1; i++) {
+            for (let j = i + 1; j < length; j++) {
+                if (array[i] > array[j]) {
+                    [array[i], array[j]] = [array[j], array[i]]
+                }
+            }
+        }
+        for (let i = 0; i < length; i++) {
+            if (numbers[i] == array [0]) {
+                break
+            }
+            count++
+        }
+        for (let i=0;i<length;i++) {
+            if (i!=count) {
+                result.push(numbers[i])
+            }
+        }
+        return result
+    }
+
+    function removeSmallest2(numbers) {
+        let indexOfMin = numbers.indexOf(Math.min(...numbers));
+        return [...numbers.slice(0, indexOfMin), ...numbers.slice(indexOfMin + 1)];
+    }
+
+    function removeSmallest3(numbers) {
+        const min = Math.min.apply(this, numbers);
+        return numbers.filter((num, idx, arr) => idx !== arr.indexOf(min));
+    }
+
+    const removeSmallest4 = numbers => numbers.filter((n,i) => i !== numbers.indexOf(Math.min(...numbers)));
+
+    function removeSmallest5(numbers) {
+        numbers = numbers.slice(0);
+        const min = Math.min(...numbers);
+        numbers.splice(numbers.indexOf(min), 1);
+        return numbers;
+    }
+
+    console.log(removeSmallest([1, 2, 3, 1, 4, 5]))
+    console.log(removeSmallest([]))
+
+
+    // Create a function that returns the sum of the two lowest positive numbers given an array of minimum 4 positive integers. No floats or non-positive integers will be passed.
+    // assert.strictEqual(sumTwoSmallestNumbers([5, 8, 12, 19, 22]), 13 , "Sum should be 13");
+    // assert.strictEqual(sumTwoSmallestNumbers([15, 28, 4, 2, 43]), 6 , "Sum should be 6");
+    // assert.strictEqual(sumTwoSmallestNumbers([3, 87, 45, 12, 7]), 10 , "Sum should be 10");
+    // assert.strictEqual(sumTwoSmallestNumbers([23, 71, 33, 82, 1]), 24 , "Sum should be 24");
+    // assert.strictEqual(sumTwoSmallestNumbers([52, 76, 14, 12, 4]), 16
+
+    // function removeSmallest2(numbers) {
+    //     let indexOfMin = numbers.indexOf(Math.min(...numbers));
+    //     console.log(indexOfMin)
+    //     return [...numbers.slice(0, indexOfMin), ...numbers.slice(indexOfMin + 1)];
+    // }
+
+    function sumTwoSmallestNumbers(numbers) {
+        let first = Math.min(...numbers)
+        numbers.splice(numbers.indexOf(first), 1)
+        let second = Math.min (...numbers)
+        return first + second
+    }
+
+    console.log(sumTwoSmallestNumbers([15, 28, 4, 2, 2.234, -1, 43]))
