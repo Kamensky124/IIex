@@ -1652,3 +1652,56 @@
     }
 
     console.log(sumTwoSmallestNumbers([15, 28, 4, 2, 2.234, -1, 43]))
+
+    // Jaden Casing Strings
+    //
+    // How can mirrors be real if our eyes aren't real"
+    String.prototype.toJadenCase = function () {
+//   assign 'this' keyword to a variable and split string into an array
+        var result = this.split(" ");
+
+//   loop through the array changing first character of each item uppercase & adding it to the remaing letters in each item
+        for(let i = 0; i < result.length; i++) {
+            result[i] = result[i].charAt(0).toUpperCase() + result[i].substring(1);
+        }
+//   return items joined back together in a string
+        return result.join(' ');
+    }
+
+    //better
+    String.prototype.toJadenCase = function () {
+        return this.split(" ").map(function(word){
+            return word.charAt(0).toUpperCase() + word.slice(1);
+        }).join(" ");
+    }
+
+        //another way
+    String.prototype.toJadenCase = function() {
+        return this
+            .split(" ")
+            .map(i => i.replace(i[0], i[0].toUpperCase()))
+            .join(" ");
+    };
+
+    var str = "How can mirrors be real if our eyes aren't real"
+    console.log(str.toJadenCase())
+
+    // oddOrEven
+
+    function oddOrEven(array) {
+        return array.reduce((acc, val) => acc + val, 0)%2 ? 'odd' : 'even'
+    }
+
+    // var2
+    function oddOrEven2(array) {
+        var result = 0;
+        for (var i = 0; i < array.length; i++)
+        {result+=array[i];}
+        if (result%2 == 0)
+        {return "even";}
+        else{return "odd";}
+    }
+
+    // .reduce((acc, st) => acc + st.scores, 0)
+    console.log(oddOrEven([1]))
+

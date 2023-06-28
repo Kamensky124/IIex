@@ -1,99 +1,66 @@
-// import './index.css';
-// import reportWebVitals from './reportWebVitals';
-// import {combineReducers, createStore} from 'redux'
-// import React, {useState, useReducer, useEffect, useCallback, useMemo} from 'react';
-// import {Provider, useSelector, useDispatch} from 'react-redux'
-// import ReactDOM from 'react-dom';
-
 import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom/client';
 import { applyMiddleware, combineReducers, legacy_createStore as createStore } from 'redux'
-import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { Provider, TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import axios from 'axios';
+import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk'
+import axios, { AxiosError } from 'axios';
+
 
 // Types
-type PostType = {
-    body: string
+type CommentType = {
+    postId: string
     id: string
-    title: string
-    userId: string
+    name: string
+    email: string
+    body: string
 }
-
-type PayloadType = {
-    title: string
-    body?: string
-}
-
 
 // Api
 const instance = axios.create({baseURL: 'https://exams-frontend.kimitsu.it-incubator.ru/api/'})
 
-const postsAPI = {
-    getPosts() {
-        return instance.get<PostType[]>('posts')
-    },
-    updatePostTitle(postId: string, post: PayloadType) {
-        return instance.put<PostType>(`posts/${postId}`, post)
+const commentsAPI = {
+    getComments() {
+        return instance.get<CommentType[]>('comments')
     }
 }
 
-
 // Reducer
-const initState = [] as PostType[]
+const initState = {
+    comments: [] as CommentType[]
+}
 
 type InitStateType = typeof initState
 
-const postsReducer = (state: InitStateType = initState, action: ActionsType): InitStateType => {
+const appReducer = (state: InitStateType = initState, action: ActionsType) => {
     switch (action.type) {
-        case 'POSTS/GET-POSTS':
-            return action.posts
-
-        case 'POSTS/UPDATE-POST-TITLE':
-            return state.map((p) => {
-                if (p.id === action.post.id) {
-                    return {...p, title: action.post.title}
-                } else {
-                    return p
-                }
-            })
+        case 'COMMENTS/GET-COMMENTS':
+            return {...state, comments: action.comments}
 
         default:
             return state
     }
 }
 
-const getPostsAC = (posts: PostType[]) => ({type: 'POSTS/GET-POSTS', posts} as const)
-const updatePostTitleAC = (post: PostType) => ({type: 'POSTS/UPDATE-POST-TITLE', post} as const)
-type ActionsType = ReturnType<typeof getPostsAC> | ReturnType<typeof updatePostTitleAC>
+const getCommentsAC = (comments: CommentType[]) => ({type: 'COMMENTS/GET-COMMENTS', comments} as const)
+type ActionsType = ReturnType<typeof getCommentsAC>
 
-const getPostsTC = (): AppThunk => (dispatch) => {
-    postsAPI.getPosts()
+// Thunk
+const getCommentsTC = (): AppThunk => (dispatch) => {
+    commentsAPI.getComments()
         .then((res) => {
-            dispatch(getPostsAC(res.data))
+            // debugger
+            dispatch(getCommentsAC(res.data))
+        })
+        .catch((e: AxiosError) => {
+            // debugger
+            // alert(`РЎРѕРѕР±С‰РµРЅРёРµ РѕР± РѕС€РёР±РєРµ: ${e.message}`)
         })
 }
 
-const updatePostTC = (postId: string): AppThunk => (dispatch, getState: any) => {
-    try {
-        const currentPost = getState().find((p: PostType) => p.id === postId)
-
-        if (currentPost) {
-            const payload = {title: 'Это просто заглушка. Backend сам сгенерирует новый title'}
-            postsAPI.updatePostTitle(postId, payload)
-                .then((res) => {
-                    dispatch(updatePostTitleAC(res.data))
-                })
-        }
-    } catch (e) {
-        alert('Обновить пост не удалось ?')
-    }
-
-}
 
 // Store
 const rootReducer = combineReducers({
-    posts: postsReducer,
+    app: appReducer,
 })
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
@@ -103,29 +70,28 @@ type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, A
 const useAppDispatch = () => useDispatch<AppDispatch>()
 const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
-// App
-const App = () => {
+
+// Components
+export const App = () => {
+
+    const comments = useAppSelector(state => state.app.comments)
     const dispatch = useAppDispatch()
-    const posts = useAppSelector(state => state.posts)
 
     useEffect(() => {
-        dispatch(getPostsTC())
+        dispatch(getCommentsTC())
     }, [])
-
-    const updatePostHandler = (postId: string) => {
-        dispatch(updatePostTC(postId))
-    }
 
     return (
         <>
-            <h1>? Список постов</h1>
+            <h1>рџ“ќ РЎРїРёСЃРѕРє РєРѕРјРјРµРЅС‚Р°СЂРёРµРІ</h1>
             {
-                posts.map(p => {
-                    return <div key={p.id}>
-                        <b>title</b>: {p.title}
-                        <button onClick={() => updatePostHandler(p.id)}>Обновить пост</button>
-                    </div>
-                })
+                comments.length
+                    ?
+                    comments.map(c => {
+                        return <div key={c.id}><b>Comment</b>: {c.body} </div>
+                    })
+                    :
+                    <h3>вќЊ РљРѕРјРјРµРЅС‚Р°СЂРёРё РЅРµ РїРѕРґРіСЂСѓР·РёР»РёСЃСЊ. РџСЂРѕРёР·РѕС€Р»Р° РєР°РєР°СЏ-С‚Рѕ РѕС€РёР±РєР°. РќР°Р№РґРё Рё РёСЃРїСЂР°РІСЊ РµРµ</h3>
             }
         </>
     )
@@ -134,14 +100,10 @@ const App = () => {
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(<Provider store={store}> <App/></Provider>)
 
-// ? Описание:
-// Попробуйте  .
-// Debugger / network / console.log вам в помощь
-// Найдите ошибку и вставьте исправленную строку кода в качестве ответа.
+// рџ“њ РћРїРёСЃР°РЅРёРµ:
+// вќЊ РљРѕРјРјРµРЅС‚Р°СЂРёРё РЅРµ РїРѕРґРіСЂСѓР·РёР»РёСЃСЊ. РџСЂРѕРёР·РѕС€Р»Р° РєР°РєР°СЏ-С‚Рѕ РѕС€РёР±РєР°.
+// Р’ РґР°РЅРЅРѕРј Р·Р°РґР°РЅРёРё РІР°Рј РЅСѓР¶РЅРѕ РЅР°Р№С‚Рё РѕС€РёР±РєСѓ Рё РїРѕС‡РёРЅРёС‚СЊ РїСЂРёР»РѕР¶РµРЅРёРµ.
+// Р•СЃР»Рё СЃРґРµР»Р°РµС‚Рµ РІСЃРµ РІРµСЂРЅРѕ, С‚Рѕ СѓРІРёРґРёС‚Рµ РєРѕРјРјРµРЅС‚Р°СЂРёРё.
+// Р’ РєР°С‡РµСЃС‚РІРµ РѕС‚РІРµС‚Р° СѓРєР°Р·Р°С‚СЊ РёСЃРїСЂР°РІР»РµРЅРЅСѓСЋ СЃС‚СЂРѕРєСѓ РєРѕРґСѓ
 
-// ? Пример ответа: const payload = {...currentPost, tile: 'Летим ?'}
-
-// ReactDOM.render(<IntervalExample/>, document.getElementById('root'))
-// @ts-ignore
-window.store = store;
-
+// рџ–Ґ РџСЂРёРјРµСЂ РѕС‚РІРµС‚Р°: const store = createStore(rootReducer, applyMiddleware(thunk))
