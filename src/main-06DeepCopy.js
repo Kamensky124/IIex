@@ -155,6 +155,7 @@ for (let i=1; i < students.length; i++) {
         }
     }
 }
+
 let best1 = students[0]
 let best2 = students[0]
 for (let i = 0; i < students.length; i++) {

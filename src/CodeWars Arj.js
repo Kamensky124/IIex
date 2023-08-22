@@ -1705,3 +1705,142 @@
     // .reduce((acc, st) => acc + st.scores, 0)
     console.log(oddOrEven([1]))
 
+    // Find the divisors!
+    //     divisors(12); // should return [2,3,4,6]
+    // divisors(25); // should return [5]
+    // divisors(13); // should return "13 is prime"
+    // Чтобы найти все делители числа, можно также проверять все числа, начиная с 1 и заканчивая самим числом. Если число делится на какое-то из этих чисел без остатка, то это число является делителем2.
+    // Create a function named divisors/Divisors that takes an integer n > 1 and returns an array with all of the integer's divisors(except for 1 and the number itself), from smallest to largest. If the number is prime return the string '(integer) is prime' (null in C#) (use Either String a in Haskell and Result<Vec<u32>, String> in Rust).
+    function divisors(integer) {
+        let r = []
+        for(let i = 2; i<integer; i++){
+            if(integer%i == 0) r.push(i)
+        }
+        let res = r.length !== 0 ? r : `${integer} is prime`
+        return res
+    }
+
+    function divisors2( int ) {
+        const arr = Array.from({length: int-1}, (_, i)=> i+1).slice(1).filter(el => int % el === 0)
+        return arr.length ? arr : `${int} is prime`;
+    };
+
+    console.log(divisors(12))
+    console.log(divisors(13))
+    console.log(divisors(15))
+
+    // Breaking chocolate problem
+    // Your task is to split the chocolate bar of given dimension n x m into small squares. Each square is of size 1x1 and unbreakable. Implement a function that will return minimum number of breaks needed.
+    //
+    //     For example if you are given a chocolate bar of size 2 x 1 you can split it to single squares in just one break, but for size 3 x 1 you must do two breaks.
+    //
+    //     If input data is invalid you should return 0 (as in no breaks are needed if we do not have any chocolate to split). Input will always be a non-negative integer.
+
+    var breakChocolate = function(n, m) {
+        return (n*m === 0) ? 0 : n * m - 1;
+    };
+
+    // Sum of a sequence
+    // Your task is to write a function which returns the sum of a sequence of integers.
+    //     The sequence is defined by 3 non-negative values: begin, end, step.
+    //     If begin value is greater than the end, your function should return 0. If end is not the result of an integer number of steps, then don't add it to the sum. See the 4th example below.
+    // Examples
+    // 2,2,2 --> 2
+    // 2,6,2 --> 12 (2 + 4 + 6)
+    // 1,5,1 --> 15 (1 + 2 + 3 + 4 + 5)
+    // 1,5,3  --> 5 (1 + 4)
+    // assert.strictEqual(sequenceSum(2, 6, 2), 12)
+    // assert.strictEqual(sequenceSum(1, 5, 1), 15)
+    // assert.strictEqual(sequenceSum(1, 5, 3), 5)
+
+    // why sum is undefined
+
+    const sequenceSum = (begin, end, step) => {
+        let sum = 0;
+        let arr = []
+        for (let i = begin; i <= end; i+=step) {
+            arr.push(i);
+        }
+        arr.forEach((element) => {
+            sum += element;
+        });
+        return sum
+    };
+    const sequenceSum2 = (begin, end, step) => {
+        var sum = 0;
+        for(var i=begin;i<=end;i+=step)
+        {
+            sum += i;
+        }
+        return sum;
+    };
+    //with recursion
+    const sequenceSum3 = (begin, end, step) => {
+        if (begin > end) {
+            return 0;
+        }
+        return begin + sequenceSum(begin + step, end, step);
+    };
+
+    console.log(sequenceSum(2, 6, 2))
+
+    // Money, Money, Money
+    // assert.strictEqual(calculateYears(1000, 0.05, 0.18, 1100), 3)
+    // assert.strictEqual(calculateYears(1000, 0.01625, 0.18, 1200), 14)
+    // assert.strictEqual(calculateYears(1000, 0.05, 0.18, 1000), 0)
+
+    function calculateYears(principal, interest, tax, desired) {
+        let year = 0;
+        while (principal < desired) {
+            year++;
+            principal = principal + ((principal * interest) - (principal * interest * tax))
+        }
+        return year
+    }
+
+    function calculateYears2(principal, interest, tax, desired) {
+        var start = 0;
+        while(principal < desired) {
+            var intBeforeTax = principal * interest;
+            var intRate = (intBeforeTax - (intBeforeTax * tax));
+            principal+=intRate;
+            start++;
+        }
+        return start;
+    }
+
+    console.log(calculateYears(1000, 0.01625, 0.18, 1200))
+
+    // The two oldest ages function/method needs to be completed. It should take an array of numbers as its argument and return the two highest numbers within the array. The returned value should be an array in the format [second oldest age,  oldest age].
+// The order of the numbers passed in could be any order. The array will always include at least 2 items. If there are two or more oldest age, then return both of them in array format.
+// [1, 2, 10, 8] --> [8, 10]
+// [1, 5, 87, 45, 8, 8] --> [45, 87]
+// [1, 3, 10, 0]) --> [3, 10]
+// return the two oldest/oldest ages within the array of ages passed in.
+
+function twoOldestAges2(ages){
+    let oldest = -Infinity;
+    let second = -Infinity;
+    
+    for (let i = 0; i < ages.length; ++i)
+    {
+      if (ages[i] > oldest)
+      {
+        second = oldest;
+        oldest = ages[i];
+      }
+      else if (ages[i] > second)
+      {
+        second = ages[i];
+      }
+    }
+    
+    return [second, oldest];
+  }
+
+function twoOldestAges(ages) {
+    ages = ages.sort((a, b) => b - a);
+    return [ages[1], ages[0]];
+  }
+
+console.log(twoOldestAges([1, 3, 10, 0]));
